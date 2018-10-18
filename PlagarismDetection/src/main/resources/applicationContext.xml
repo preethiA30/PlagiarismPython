@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- <context:component-scan base-package="com.in28minutes.spring.basics"/> -->
+    <!--//private static final String URI =-->
+    <!--"mongodb://amdinteam114:1ND2dG4X3d4wp3y7@plagiarismdetector-shard-00-00-kt6hr.mongodb.net:27017,plagiarismdetector-shard-00-01-kt6hr.mongodb.net:27017,plagiarismdetector-shard-00-02-kt6hr.mongodb.net:27017/admin?replicaSet=PlagiarismDetector-shard-0-->
+    <!--&ssl=true";-->
+
+    <!--//MongoClientURI clientURI = new MongoClientURI(URI);-->
+    <!--//MongoClient mongoClient = new MongoClient(clientURI);-->
+
+
+    <bean id="xmlStringBean2" class="email.EmailServiceImpl">
+        <constructor-arg name="username" value="${email.username}"/>
+        <constructor-arg name="password" value="${email.password}"/>
+        <constructor-arg name="organization" value="${email.organization}"/>
+    </bean>
+
+    <bean id="mongoclientURI" class="com.mongodb.MongoClientURI">
+        <constructor-arg name="uri" value="${mongo.uri}"/>
+    </bean>
+    <bean id="mongoClient" class="com.mongodb.MongoClient">
+        <constructor-arg name="uri" ref="mongoclientURI"/>
+    </bean>
+    <bean id="MongoDao" class="dao.MongoDao">
+        <constructor-arg name="mongoClient" ref="mongoClient"/>
+        <constructor-arg name="databaseName" value="${mongo.databaseName}"/>
+    </bean>
+
+    <bean id="loginService" class="service.login.LoginServiceImpl">
+        <constructor-arg name="instructorDao" ref="instructorDao"/>
+    </bean>
+    <bean id="instructorDao" class="dao.InstructorDaoImpl">
+        <constructor-arg name="mongoDao" ref="MongoDao"/>
+    </bean>
+
+    <bean id="registerServices" class="service.register.RegisterServiceImpl">
+        <constructor-arg name="instructorDao" ref="instructorDao"/>
+    </bean>
+
+    <bean id="courseDao" class="dao.CourseDaoImpl">
+        <constructor-arg name="mongoDao" ref="MongoDao"/>
+    </bean>
+
+    <bean id="jgit" class="jgit.JgitImpl">
+    </bean>
+
+
+    <bean id="assignmentDao" class="dao.AssignmentDaoImpl">
+        <constructor-arg name="mongoDao" ref="MongoDao"/>
+    </bean>
+
+
+    <bean id="assignementService" class="service.assignments.AssignmentServiceImpl">
+        <constructor-arg name="assignmentDao" ref="assignmentDao"/>
+    </bean>
+
+    <bean id="counterDao" class="dao.CounterDaoImpl">
+        <constructor-arg name="mongoDao" ref="MongoDao"/>
+    </bean>
+
+    <bean id="counterServices" class="service.counter.CounterServiceImpl">
+        <constructor-arg name="counterDao" ref="counterDao"/>
+    </bean>
+
+    <bean id="courseService" class="service.courses.CourseServiceImpl">
+        <constructor-arg name="courseDao" ref="courseDao"/>
+        <constructor-arg name="jgitImpl" ref="jgit"/>
+        <constructor-arg name="assignmentService" ref="assignementService"/>
+    </bean>
+
+    <bean id="courseController" class="controller.CourseController">
+        <constructor-arg name="courseService" ref="courseService"/>
+    </bean>
+
+    <bean id="magicAlgo" class="service.plagiarism.PlagiarismResultImp">
+    </bean>
+
+    <bean id="assignementController" class="controller.AssignementController">
+        <constructor-arg name="assignmentService" ref="assignementService"/>
+        <constructor-arg name="plagiarismResultInterface" ref="magicAlgo"/>
+        <constructor-arg name="jgit" ref="jgit"/>
+        <constructor-arg name="courseService" ref="courseService"/>
+        <constructor-arg name="counterService" ref="counterServices"/>
+    </bean>
+
+    <bean id="resultController" class="controller.ResultController">
+        <constructor-arg name="assignmentService" ref="assignementService"/>
+    </bean>
+
+
+    <bean id="adminService" class="service.admin.AdminServiceImpl">
+        <constructor-arg name="instructorDao" ref="instructorDao"/>
+    </bean>
+</beans>

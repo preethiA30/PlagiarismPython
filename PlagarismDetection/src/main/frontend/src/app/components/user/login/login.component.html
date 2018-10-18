@@ -1,0 +1,27 @@
+<div class="container">
+  <img id="neu-logo" src="https://web.northeastern.edu/protect/assets/neulogo.png">
+  <h1 id="page-title"><b>Welcome to MAPS Plagiarism Detector</b></h1>
+
+  <input placeholder="Username"
+         name ="username"
+         [(ngModel)]="username"
+         type="text"
+         class="form-control"/>
+
+  <input placeholder="Password"
+         name = "password"
+         [(ngModel)]="password"
+         type="password"
+         class="form-control"/>
+
+  <div *ngIf=errorFlag
+       class="alert alert-danger">
+    {{error}}
+  </div>
+
+
+
+  <button class="btn btn-primary btn-block" type="submit" (click)="login()">Login</button>
+
+  <button class="btn btn-success btn-block" [routerLink]="['/register']" >Register</button>
+</div>

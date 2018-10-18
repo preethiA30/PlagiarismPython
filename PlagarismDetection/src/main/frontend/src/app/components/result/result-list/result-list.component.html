@@ -1,0 +1,92 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-text pull-left" style="margin-left: 0px;">
+        <a [routerLink]="['/user', 'course', courseId, 'assignment']">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+      </div>
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- List Items -->
+<div class="container scroll-pane">
+  <h1 id="page-title"><b>Result List</b></h1>
+
+  <ul class="list-inline text-center">
+    <li class="list-inline-item" style="color: #f44141"><h4>Very Likely: (x ≧ 90%)</h4></li>
+    <li class="list-inline-item" style="color: #f47041"><h4>Likely: (75% ≦ x < 90%)</h4></li>
+    <li class="list-inline-item" style="color: #f4ca41"><h4>Not Likely: (x < 75%)</h4></li>
+  </ul>
+  <br>
+
+  <div class="list-group" *ngFor="let result of results">
+
+
+    <div *ngIf="(result.percentage >= 90)">
+      <a id="result" class="list-group-item clearfix" style="background-color : #f44141;">
+        <a class="list-group-item-action col-sm-11"
+           [routerLink]="['/user', 'course', courseId, 'assignment', assignmentId, 'result', result.hexId]">
+          <h4 class="pull-left">{{result.student1}} VS. {{result.student2}}</h4>
+          <h4 class="pull-left clearfix" style="padding-left: 10em">Strategy:
+            {{result.type}}</h4>
+          <h4 class="pull-right">
+            <span id="percent-text" class="badge">{{result.percentage | number:'1.0-0'}}%</span>
+          </h4>
+        </a>
+      </a>
+    </div>
+
+    <div *ngIf="(result.percentage >= 75 && result.percentage < 90)">
+      <a id="result" class="list-group-item clearfix" style="background-color: #f47041">
+        <a class="list-group-item-action col-sm-11"
+           [routerLink]="['/user', 'course', courseId, 'assignment', assignmentId, 'result', result.hexId]">
+          <h4 class="pull-left">{{result.student1}} VS. {{result.student2}}</h4>
+          <h4 class="pull-left clearfix" style="padding-left: 10em">Strategy: {{result.type}}</h4>
+          <h4 class="pull-right">
+            <span id="percent-text" class="badge">{{result.percentage | number:'1.0-0'}}%</span>
+          </h4>
+        </a>
+      </a>
+    </div>
+
+    <div id="result" *ngIf="(result.percentage > 40 && result.percentage < 75)">
+      <a class="list-group-item clearfix" style="background-color: #f4ca41">
+        <a class="list-group-item-action col-sm-11"
+           [routerLink]="['/user', 'course', courseId, 'assignment', assignmentId, 'result', result.hexId]">
+          <h4 class="pull-left">{{result.student1}} VS. {{result.student2}}</h4>
+          <h4 class="pull-left clearfix" style="padding-left: 10em">Strategy: {{result.type}}</h4>
+          <h4 class="pull-right">
+            <span id="percent-text" class="badge">{{result.percentage | number:'1.0-0'}}%</span>
+          </h4>
+        </a>
+      </a>
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<!-- Footer -->
+<nav id="website-footer" class="navbar navbar-default navbar-fixed-bottom">
+
+</nav>

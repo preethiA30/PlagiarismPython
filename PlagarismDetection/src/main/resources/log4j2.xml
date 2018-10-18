@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <!--Properties for the logger-->
+    <Properties>
+        <Property name="OrganizationEmail">team114neu@gmail.com</Property>
+        <Property name="AdminEmail">thakker.m@husky.neu.edu</Property>
+        <Property name="smtpPort">465</Property>
+        <Property name="smtpUsername">team114neu@gmail.com</Property>
+        <Property name="smtpHost">smtp.googlemail.com</Property>
+        <Property name="smtpPassword">team114team114</Property>
+        <Property name="protocol">smtps</Property>
+        <Property name="bufferSize">20</Property>
+        <Property name="subject">Error in Plagarism Detection System</Property>
+
+    </Properties>
+    <Appenders>
+        <!--Email Api Logger Configuration-->
+        <SMTP name="Mailer"
+              subject="${subject}" to="${AdminEmail}" from="${OrganizationEmail}"
+              smtpHost="${smtpHost}" smtpPort="${smtpPort}"
+              smtpProtocol="${protocol}" smtpUsername="${smtpUsername}"
+              smtpPassword="${smtpPassword}" smtpDebug="false" bufferSize="${bufferSize}">
+
+            <ThresholdFilter level="error" onMatch="NEUTRAL" onMismatch="DENY"/>
+            <PatternLayout>
+                <pattern>%d{dd-MM-yyyy HH:mm:ss,SSS} %5p %m%n</pattern>
+            </PatternLayout>
+        </SMTP>
+
+        <!--Next Generation api call for faster performace-->
+        <Async name="AsyncMailer">
+            <AppenderRef ref="Mailer"/>
+        </Async>
+
+        <!--Rolling log file with date appended -->
+        <RollingFile name="file-log" fileName="logs/logs.log" filePattern="logs/logFile%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n </pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+        <!--Setup for console Appenders-->
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </Console>
+
+    </Appenders>
+
+    <!--Loggers Root has all info threshold added in email-->
+    <Loggers>
+        <Root level="info" additivity="false">
+            <AppenderRef ref="file-log"/>
+            <AppenderRef ref="AsyncMailer"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

@@ -1,0 +1,66 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-text pull-left" style="margin-left: 0px;">
+        <a [routerLink]="['/user', 'course', courseId, 'assignment', assignmentId, 'result']">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+      </div>
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h1 id="page-title"><b>Comparisons</b></h1>
+  <h3>
+    <b>
+      <span class="label label-danger">Total Count: {{snippets.length}}</span>
+    </b>
+  </h3>
+
+  <div class="list-group" *ngFor="let snippet of snippets">
+
+    <div class="list-group-item" *ngFor="let code of snippet; let i = index">
+
+      <div class="list-group-item-danger" *ngIf="i === 0">
+        <b> Student Folder Name: {{student1}}</b>
+        <br>
+        <pre><b>Filename: {{getFileName(code)}}</b><br>{{getFirstLine(code)}}<br><mark><b
+          style="font-size: 14px">{{getHighlighted(code)}}</b></mark><br>{{getLastLine(code)}}</pre>
+      </div>
+
+      <div class="list-group-item-danger" *ngIf="i > 0">
+        <b> Student Folder Name: {{student2}}</b>
+        <br>
+        <pre><b>Filename: {{getFileName(code)}}</b><br>{{getFirstLine(code)}}<br><mark><b
+          style="font-size: 14px">{{getHighlighted(code)}}</b></mark><br>{{getLastLine(code)}}</pre>
+
+      </div>
+
+    </div>
+    <br>
+  </div>
+</div>
+
+
+<!-- Footer -->
+<nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
+
+</nav>

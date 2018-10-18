@@ -1,0 +1,121 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</nav>
+
+
+<div class="container">
+  <form>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text"
+             class="form-control"
+             id="username"
+             placeholder="Username"
+             name="username"
+             [(ngModel)]="username"/>
+    </div>
+  </form>
+
+  <form>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password"
+             class="form-control"
+             id="password"
+             placeholder="Password"
+             name="password"
+             [(ngModel)]="password"/>
+    </div>
+  </form>
+
+  <form>
+    <div class="form-group">
+      <label for="verifyPassword">Verify Password</label>
+      <input type="password"
+             class="form-control"
+             id="verifyPassword"
+             placeholder="Type your password again"
+             name="verifyPassword"
+             [(ngModel)]="verifyPassword"/>
+    </div>
+  </form>
+
+  <form>
+    <div class="form-group">
+      <label for="gitHubUsername">GitHub Username</label>
+      <input type="text"
+             class="form-control"
+             id="gitHubUsername"
+             placeholder="GitHub Username"
+             name="gitHubUsername"
+             [(ngModel)]="gitHubUsername">
+    </div>
+  </form>
+
+  <form>
+    <div class="form-group">
+      <label for="gitHubPassword">GitHub Password</label>
+      <input type="password"
+             class="form-control"
+             id="gitHubPassword"
+             placeholder="GitHub Password"
+             name="gitHubPassword"
+             [(ngModel)]="gitHubPassword">
+    </div>
+  </form>
+
+  <form>
+    <div class="form-group">
+      <label for="verifyGitHubPassword">Verify GitHub Password</label>
+      <input type="password"
+             class="form-control"
+             id="verifyGitHubPassword"
+             placeholder="Type your GitHub password again"
+             name="verifyGitHubPassword"
+             [(ngModel)]="verifyGitHubPassword">
+    </div>
+  </form>
+
+
+  <button class="btn btn-success btn-block"
+          type="submit">Apply Changes</button>
+
+  <br>
+  <br>
+
+  <button class="btn btn-primary btn-block"
+          type="submit"
+          [routerLink]="['/user', 'course']">Go To Courses</button>
+
+</div>
+
+<!-- Footer -->
+<nav id="user-footer" class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-text pull-right">
+      <a [routerLink]="['/profile']">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </div>
+
+  </div>
+</nav>

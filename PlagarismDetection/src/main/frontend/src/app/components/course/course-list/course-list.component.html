@@ -1,0 +1,61 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+<div class="container">
+  <h1 id="page-title"><b>Courses</b></h1>
+
+  <div *ngIf=infoFlag
+       class="container-fluid alert alert-info">
+    {{infoMessage}}
+  </div>
+
+  <div *ngIf=errorFlag
+       class="container-fluid alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+  <div class="list-group" *ngFor="let course of courses">
+    <a class="list-group-item clearfix">
+      <a class="list-group-item-action col-sm-11"
+         [routerLink]="['/user', 'course', course.hexid, 'assignment']">
+        <h4 class="pull-left">{{course.name}}</h4>
+      </a>
+    </a>
+  </div>
+</div>
+
+
+<div class="container">
+  <button class="btn btn-success btn-block" [routerLink]="['/user', 'course', 'new']">
+    Add New Course
+  </button>
+</div>
+
+
+<!-- Footer -->
+<nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
+
+</nav>

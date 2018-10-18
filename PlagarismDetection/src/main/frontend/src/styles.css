@@ -1,0 +1,41 @@
+input {
+  margin-bottom: 5px;
+}
+
+.btn {
+  margin-bottom: 0px;
+}
+
+body {
+  margin-top: 100px;
+  margin-bottom: 60px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+
+a:hover
+{
+  text-decoration: none;
+}
+
+#page-title {
+  text-align: center;
+  text-shadow: #dd574c;
+  margin-bottom: 20px;
+  font-family: monospace;
+}
+
+#neu-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 100px;
+  width: 70%;
+}
+
+#percent-text {
+  font-size: larger;
+}

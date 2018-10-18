@@ -1,0 +1,60 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h1 id="page-title"><b>All Users</b></h1>
+
+  <table class="table table-bordered table-sm">
+
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Number of Courses</th>
+      <th scope="col">Delete User</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let user of users; let i = index">
+
+      <td><b>{{i + 1}}</b></td>
+      <td>{{user.username}}</td>
+      <td>{{user.courses.length}}</td>
+      <td>
+        <button class="btn btn-block btn-danger"
+                (click)="deleteUser(user.hexId)">Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+
+</div>
+
+
+<!-- Footer -->
+<nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
+
+</nav>

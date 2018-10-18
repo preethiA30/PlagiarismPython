@@ -1,0 +1,112 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-text pull-left" style="margin-left: 0px;">
+        <a [routerLink]="['/user', 'course']">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+      </div>
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<div class="row container-fluid">
+
+  <div class="container col-sm-3 hidden-xs" *ngIf="true">
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+    <div class="list-group">
+
+      <div class="list-group-item list-group-item-info">
+        <h3>Adding a New Course (Read Me)</h3>
+        <br>
+
+        <p>The GitHub Repo URL refers to the course repository.
+          In order to successfully add a course, a certain GitHub folder structure is required.
+          The assignment folders should be inside the course folder, and in each assignment folder
+          there should be a project folder for each student for that particular assignment.</p>
+
+        <pre>   Course
+      |- HW 1
+      |- HW 2
+      |- HW 3
+          |- student-1
+          |- student-2</pre>
+
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container col-sm-9">
+    <h1 id="page-title">Create a New Course</h1>
+
+    <div class="progress" *ngIf="newCourseProgress">
+      <div class="progress-bar progress-bar-striped active" role="progressbar"
+           style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+        <b>Creating Course</b>
+      </div>
+    </div>
+
+    <label for="name">Name</label>
+    <input placeholder="Give this Course a Name"
+           name="name"
+           id="name"
+           [(ngModel)]="name"
+           type="text"
+           class="form-control"/>
+
+
+    <label for="repoUrl">Repo Url</label>
+    <input placeholder="Enter GitHub Repo URL"
+           name="repoUrl"
+           id="repoUrl"
+           [(ngModel)]="repoUrl"
+           type="text"
+           class="form-control"/>
+
+    <div *ngIf=errorFlag
+         class="alert alert-danger">
+      {{error}}
+    </div>
+
+    <br>
+
+    <button class="btn btn-success btn-block" type="submit" (click)="createCourse()">Submit</button>
+
+  </div>
+
+
+</div>
+
+<!-- Footer -->
+<nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
+  <div class="container-fluid">
+    <div class="navbar-text pull-right">
+      <a [routerLink]="['/profile']">
+        <span class="glyphicon glyphicon-user"></span>
+      </a>
+    </div>
+
+  </div>
+</nav>

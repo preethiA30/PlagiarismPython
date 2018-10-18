@@ -1,0 +1,60 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+
+<div class="container">
+  <h1 id="page-title"><b>Statistics</b></h1>
+  <br>
+
+  <div class="container row clearfix">
+    <button class="btn btn-warning pull-left clearfix" [routerLink]="['/admin/user']">Manage Users</button>
+    <h4>
+      <span class="pull-right label label-success clearfix">Status: Online</span>
+    </h4>
+  </div>
+  <br>
+  <br>
+
+  <table class="table table-bordered table-sm">
+
+    <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Results Generated</th>
+      <th scope="col">For # Assignments</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let stat of stats">
+      <td><b>{{stat.date}}</b></td>
+      <td>{{stat.resultCount}}</td>
+      <td>{{stat.count}}</td>
+    </tr>
+    </tbody>
+
+  </table>
+
+
+  <!-- Footer -->
+  <nav id="footer" class="navbar navbar-default navbar-fixed-bottom"></nav>
+</div>

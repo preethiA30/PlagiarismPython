@@ -1,0 +1,68 @@
+<div class="container">
+  <h1>Register</h1>
+
+  <div *ngIf=errorFlag
+       class="alert alert-danger">
+    {{error}}
+  </div>
+
+  <input placeholder="Username"
+         type="text"
+         class="form-control"
+         name="username"
+         [(ngModel)]="username"/>
+
+  <input placeholder="Password"
+         type="password"
+         class="form-control"
+         name="password"
+         [(ngModel)]="password"/>
+
+  <input placeholder="Verify Password"
+         type="password"
+         class="form-control"
+         name="verify"
+         [(ngModel)]="verifyPassword"/>
+
+
+
+  <label class="checkbox text-center">
+    <input type="checkbox" (click)="toggleGitCredentials()" [checked]="registerWithGitCredentials"/>
+    Register with GitHub credentials (required only if your GitHub repo is private!)
+  </label>
+
+  <br>
+
+  <div *ngIf="registerWithGitCredentials">
+
+    <input placeholder="Git Username"
+           type="text"
+           class="form-control"
+           name="username"
+           [(ngModel)]="gitHubUsername"/>
+
+    <input placeholder="Git Password"
+           type="password"
+           class="form-control"
+           name="password"
+           [(ngModel)]="gitHubPassword"/>
+
+    <input placeholder="Verify Git Password"
+           type="password"
+           class="form-control"
+           name="verify"
+           [(ngModel)]="verifyGitHubPassword"/>
+
+  </div>
+
+
+  <button class="btn btn-primary btn-block"
+          type="submit"
+          (click)="register()">Register
+  </button>
+
+  <button class="btn btn-danger btn-block"
+          [routerLink]="['/login']">Cancel
+  </button>
+
+</div>

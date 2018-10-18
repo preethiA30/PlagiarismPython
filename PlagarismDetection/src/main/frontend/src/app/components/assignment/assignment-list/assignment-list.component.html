@@ -1,0 +1,126 @@
+<!-- Top Nav -->
+<nav id="top-navbar" class="navbar navbar-default navbar-fixed-top">
+  <div class="row container-fluid">
+
+    <div class="col-sm-12">
+
+      <div class="navbar-text pull-left" style="margin-left: 0px;">
+        <a [routerLink]="['/user', 'course']">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+      </div>
+
+      <div class="navbar-header pull-left">
+        <a class="navbar-brand">
+          <b>Plagiarism Detector</b>
+        </a>
+      </div>
+
+      <div class="navbar-text pull-right">
+        <a [routerLink]="['/login']">
+          <span class="glyphicon glyphicon-log-out"></span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- List Items -->
+<div class="container">
+  <h1 id="page-title"><b>Assignments</b></h1>
+
+  <br>
+
+  <div class="form-group text-center">
+    <div class="form-control">
+      <label class="radio-inline">
+        <input type="radio" value="LCS" name="compStrategy"
+               [(ngModel)]="comparisonStrategy"/>LCS</label>
+
+      <label class="radio-inline">
+        <input type="radio" value="FINGERPRINT" name="compStrategy"
+               [(ngModel)]="comparisonStrategy"/>FingerPrint</label>
+
+      <label class="radio-inline">
+        <input type="radio" value="EDIT_DISTANCE" name="compStrategy"
+               [(ngModel)]="comparisonStrategy"/>Edit Distance</label>
+
+      <label class="radio-inline">
+        <input type="radio" value="null" name="compStrategy" [(ngModel)]="comparisonStrategy"
+               [checked]="true"/>All Strategies</label>
+      <a class="pull-right text-info" (click)="toggleInfoDropdown()">Information</a>
+    </div>
+
+
+  </div>
+
+  <pre class="pre-scrollable" *ngIf="infoDropdown">* If no comparison strategy is selected, results will be calculated for all strategies.<br>
+    <b>Definitions:</b>
+    <u>LCS</u>:            Longest common subsequence compares two projects and gets the same logical code.
+    <u>FingerPrint</u>:    Creates a fingerprint for each project and compares the fingerprints.
+    <u>Edit Distance</u>:  Edit distance finds the number of logical changes between two projects.
+    <u>All Strategies</u>: Combines LCS, Fingerprint, Edit Distance using a weighted polynomial function
+                    that matches results given by the Stanford MOSS system.
+  </pre>
+
+
+  <div class="progress" *ngIf="resultProgress">
+    <div class="progress-bar progress-bar-striped active" role="progressbar"
+         style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+      <b>Generating Results</b>
+    </div>
+  </div>
+
+  <div *ngIf=messageFlag
+       class="alert alert-success">
+    {{successMessage}}
+  </div>
+
+  <div *ngIf=errorFlag
+       class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+
+  <br>
+
+  <div class="list-group" *ngFor="let assignment of assignments">
+
+    <div class="list-group-item clearfix">
+
+      <div *ngIf="getResultCount(assignment) > 0">
+        <h4 class="pull-left">{{assignment.name}}</h4>
+        <button class="btn btn-lg btn-success pull-right"
+                [routerLink]="['/user', 'course', courseId, 'assignment', assignment.hexId, 'result']">
+          View Results
+        </button>
+
+        <button class="btn btn-lg btn-primary pull-right"
+                (click)="generateResults(assignment)" style="margin-right: 10px">
+          Generate Results
+        </button>
+      </div>
+
+      <div *ngIf="getResultCount(assignment) === 0">
+        <h4 class="pull-left">{{assignment.name}}</h4>
+
+        <button class="btn btn-lg btn-primary pull-right"
+                (click)="generateResults(assignment)">
+          Generate Results
+        </button>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+</div>
+
+
+<!-- Footer -->
+<nav id="footer" class="navbar navbar-default navbar-fixed-bottom">
+
+</nav>
